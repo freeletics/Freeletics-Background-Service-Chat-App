@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_chat_image.*
 import kotlinx.android.synthetic.main.item_chat_message.*
 import java.lang.RuntimeException
 
-class ChatAdapter(private val inflater: LayoutInflater, private val glide: Glide) :
+class ChatAdapter(private val inflater: LayoutInflater) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_MESSAGE = R.layout.item_chat_message
