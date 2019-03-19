@@ -13,14 +13,14 @@ import java.lang.RuntimeException
 class ChatAdapter(private val inflater: LayoutInflater) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val VIEW_TYPE_MESSAGE = R.layout.item_chat_message
-    private val VIEW_TYPE_IMAGE = R.layout.item_chat_image
+    private val VIEW_TYPE_MESSAGE = 0
+    private val VIEW_TYPE_IMAGE = 1
 
     var messages: MutableList<Message> = ArrayList()
 
     override fun getItemViewType(position: Int): Int = when (messages[position]) {
-        is Message.Text -> 0
-        is Message.Image -> 1
+        is Message.Text -> VIEW_TYPE_MESSAGE
+        is Message.Image -> VIEW_TYPE_IMAGE
     }
 
     override fun getItemCount(): Int = messages.size
