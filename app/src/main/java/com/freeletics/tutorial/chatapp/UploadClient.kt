@@ -13,7 +13,10 @@ import java.util.UUID
 
 class UploadClient {
 
-    private val url = "https://chat-android-service.herokuapp.com" // "http://0.0.0.0:8080"
+    companion object {
+        val url = "https://chat-android-service.herokuapp.com"
+    }
+
     private val retrofit = Retrofit.Builder()
         .baseUrl(url)
         .build()
@@ -32,7 +35,6 @@ class UploadClient {
         val response = api.upload(part, description).execute()
         println(response)
     }
-
 }
 
 interface UploadApi {

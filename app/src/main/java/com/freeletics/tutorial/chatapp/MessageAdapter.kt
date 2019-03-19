@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_chat_image.*
 import kotlinx.android.synthetic.main.item_chat_message.*
+import java.lang.RuntimeException
 
 class ChatAdapter(private val inflater: LayoutInflater, private val glide: Glide) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -17,8 +19,8 @@ class ChatAdapter(private val inflater: LayoutInflater, private val glide: Glide
     lateinit var messages: List<Message>
 
     override fun getItemViewType(position: Int): Int = when (messages[position]) {
-        is Message.Text -> VIEW_TYPE_MESSAGE
-        is Message.Image -> VIEW_TYPE_IMAGE
+        is Message.Text -> 0
+        is Message.Image -> 1
     }
 
     override fun getItemCount(): Int = messages.size
@@ -29,6 +31,7 @@ class ChatAdapter(private val inflater: LayoutInflater, private val glide: Glide
             VIEW_TYPE_IMAGE -> MessageViewHolder(
                 inflater.inflate(R.layout.item_chat_image, parent, false)
             )
+            else -> throw RuntimeException("Try to create ViewHolder for unknown type")
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -52,7 +55,10 @@ class ChatAdapter(private val inflater: LayoutInflater, private val glide: Glide
 
         fun bind(msg: Message.Image) {
             Glide.with(containerView.context)
-                .load("")
+                .load(UploadClient.url + "/" + msg.imageUrl)
+                .placeholder(R.color.material_grey_300)
+                .error(R.color.material_grey_300)
+                .into(image)
         }
     }
 }

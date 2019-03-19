@@ -7,12 +7,11 @@ import okhttp3.WebSocketListener
 
 class WebsocketClient {
 
-    private val url =  "https://chat-android-service.herokuapp.com" // http://0.0.0.0:8080
     private val client = OkHttpClient()
 
     fun connect(messageListener: (message: String) -> Unit): (String) -> Unit {
         val request = Request.Builder()
-            .url("$url/ws")
+            .url("${UploadClient.url}/ws")
             .build()
 
         val listener = object : WebSocketListener() {
