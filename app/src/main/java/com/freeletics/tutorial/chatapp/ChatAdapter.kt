@@ -16,7 +16,7 @@ class ChatAdapter(private val inflater: LayoutInflater) :
     private val VIEW_TYPE_MESSAGE = R.layout.item_chat_message
     private val VIEW_TYPE_IMAGE = R.layout.item_chat_image
 
-    var messages: List<Message> = ArrayList()
+    var messages: MutableList<Message> = ArrayList()
 
     override fun getItemViewType(position: Int): Int = when (messages[position]) {
         is Message.Text -> 0
